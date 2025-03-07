@@ -1,5 +1,5 @@
 # GIAIC Quarter-3 Python (Monday 2-5) Session
-# All Quarter-03 contain on this repo. 
+# All Quarter-03 Content on this repo. 
 
 ## 📌 What You’ll Find Here  
 This repository contains:  
