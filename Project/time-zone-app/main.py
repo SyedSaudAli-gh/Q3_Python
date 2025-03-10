@@ -38,6 +38,6 @@ if st.button("Convert Time Zone"):
     
     converted_time = dt.astimezone(ZoneInfo(to_time_zone)).strftime("%Y-%m-%d %I:%M:%S %p")
     
-    st.success(f"Converted Time in {to_time_zone} : {converted_time} ")
+    st.info(f"Converted Time in {to_time_zone} : {converted_time} ")
 
     
