@@ -201,7 +201,6 @@ for key, value in thisdict.items():
     print(key, ":", value)
     
     
-    
 # Create a phonebook
 phonebook: dict = {
     "Alice": "123-456-7890",
