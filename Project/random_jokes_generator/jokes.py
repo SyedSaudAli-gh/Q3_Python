@@ -29,7 +29,7 @@ def main():
 def get_pakistani_joke():
     """Fetch a random Pakistani joke from the Joke API"""
     try:
-        response = requests.get("http://127.0.0.1:8000/pakistani_joke")
+        response = requests.get("https://jokes-fast-api.vercel.app/pakistani_joke")
         
         if response.status_code == 200:
             joke_data = response.json()
