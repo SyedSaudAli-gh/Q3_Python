@@ -18,8 +18,24 @@ C = 299792458 m/s
 
 
 
-C:int = 299792458
+C: int = 299792458
 
 def main():
     mass_in_kg: float = float(input("Enter kilos of mass: "))
     
+    
+    # Calculate energy
+    # equivalently energy = mass * (C ** 2)
+    # using the ** operator to raise C to the power of 2
+    energy_in_joules: float = mass_in_kg * (C ** 2)
+    
+    # User pit the value to the display
+    print(f"e = m * C^2...")
+    print(f'm = {mass_in_kg} kg')
+    print(f'C = {C} m/s')
+    print(f'{str(energy_in_joules)} joules of energy!')
+    
+    
+if __name__ == "__main__":
+    main()
+
