@@ -4,7 +4,7 @@ import json
 from cryptography.fernet import Fernet
 import os
 import time
-from base64 import urlsafe_b64decode
+from base64 import urlsafe_b64encode
 from hashlib import pbkdf2_hmac
 
 # ==**** Data Information for User ****==
@@ -34,8 +34,8 @@ def save_data(data):
         json.dump(data, file)
         
 def generate_key(passkey):
-    key = pbkdf2_hmac("sha256", passkey.encode(), SALT, 100000)
-    return urlsafe_b64decode(key)
+    key = pbkdf2_hmac("sha256", passkey.encode(), SALT, 100000, dklen=32)
+    return urlsafe_b64encode(key)  # ✅ encode, not decode
 
 def hash_password(password):
     return hashlib.pbkdf2_hmac("sha256", password.encode(), SALT, 100000).hex()
