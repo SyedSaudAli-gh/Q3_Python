@@ -16,8 +16,8 @@ LOCKOUT_DURATION = 60
 if "authentication_user" not in st.session_state:
     st.session_state.authentication_user = None
     
-if "failed_attempt" not in st.session_state:
-    st.session_state.failed_attempt = 0
+if "failed_attempts" not in st.session_state:
+    st.session_state.failed_attempts = 0
     
 if "lockout_time" not in st.session_state:
     st.session_state.lockout_time = 0
