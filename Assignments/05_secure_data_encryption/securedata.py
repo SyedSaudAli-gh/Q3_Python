@@ -123,24 +123,10 @@ elif choice == "Store Data":
         
         if st.button("Encrypt And Save"):
             if data and passkey:
-                try:
-                    encrypted = encrypt_text(data, passkey)
-                    if encrypted:
-                        # Ensure the data list exists for the user
-                        if "data" not in stored_data[st.session_state.authenticated_user]:
-                            stored_data[st.session_state.authenticated_user]["data"] = []
-                        
-                        # Store the encrypted data
-                        stored_data[st.session_state.authenticated_user]["data"].append({
-                            "encrypted_data": encrypted,
-                            "timestamp": time.time()
-                        })
-                        save_data(stored_data)
-                        st.success("Data encrypted and saved successfully!")
-                    else:
-                        st.error("Failed to encrypt data. Please try again.")
-                except Exception as e:
-                    st.error(f"Error occurred while saving data: {str(e)}")
+                encrypted = encrypt_text(data, passkey)
+                stored_data[st.session_state.authenticated_user]["data"].append(encrypted)
+                save_data(stored_data)
+                st.success("Data encrypted and saved successfully!")
             else:
                 st.error("All fields are required to fill.")
                 
@@ -157,20 +143,16 @@ elif choice == "Retrieve Data":
         else:
             st.write("Encrypted Data Entries: ")
             for i, item in enumerate(user_data):
-                st.code(item["encrypted_data"], language="text")
-                st.write(f"Saved at: {time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(item['timestamp']))}")
+                st.code(item, language="text")
                 
             encrypted_input = st.text_area("Enter Encrypted Text")
             passkey = st.text_input("Enter Passkey To Decrypt", type="password")
             
             if st.button("Decrypt"):
-                if encrypted_input and passkey:
-                    result = decrypt_text(encrypted_input, passkey)
-                    if result:
-                        st.success(f"Decrypted: {result}")
-                    else:
-                        st.error("Incorrect passkey or corrupted data.")
+                result = decrypt_text(encrypted_input, passkey)
+                if result:
+                    st.success(f"Decrypted: {result}")
                 else:
-                    st.error("Please enter both encrypted text and passkey.")
+                    st.error("Incorrect passkey or corrupted data.")
             
                 
