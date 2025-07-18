@@ -1,0 +1,17 @@
+[project]
+name = "assignment-14-july-2025"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "dotenv>=0.9.9",
+    "openai-agents>=0.2.2",
+]
+
+[project.scripts]
+assignment-14-july-2025 = "assignment_14_july_2025:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
