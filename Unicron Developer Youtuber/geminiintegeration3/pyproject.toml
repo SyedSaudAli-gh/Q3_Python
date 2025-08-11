@@ -11,6 +11,7 @@ dependencies = [
 
 [project.scripts]
 geminiintegeration3 = "geminiintegeration3:main"
+dev = "geminiintegeration3.geminiint:main"
 
 [build-system]
 requires = ["hatchling"]
