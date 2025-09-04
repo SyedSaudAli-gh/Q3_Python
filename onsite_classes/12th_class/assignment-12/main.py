@@ -9,22 +9,22 @@ class Account(BaseModel):
 
 
 class Guardrail_output(BaseModel):
-    is_not_bank_related: bool
+    is_bank_related: bool
 
 guardrail_agent = Agent(
     name="Guardrail Agent",
-    instructions="You are a guardrail agent. You check if the user is asking you bank related questions.",
+    instructions="check if the user is asking you bank related quries.",
     output_type = Guardrail_output,
 )
 
 @input_guardrail
 async def check_bank_related(ctx:RunContextWrapper[None], agent:Agent, input:str) -> GuardrailFunctionOutput:
 
-    result = await Runner.run_sync(guardrail_agent, input , run_config = geminiConfig.config, context=ctx.context)
+    result = await Runner.run(guardrail_agent, input, context=ctx.context, run_config = geminiConfig.config)
 
     guardrail_instance = GuardrailFunctionOutput(
         output_info=result.final_output,
-        tripwire_triggered=result.final_output.is_not_bank_related,
+        tripwire_triggered=not result.final_output.is_bank_related,
     )
     return guardrail_instance
 
@@ -46,9 +46,9 @@ bank_agent = Agent(
 
 )
 
-user_context = Account(name = "Saud", pin = 1234)
+user_context = Account(name ="Saud", pin = 1234)
 
-result = Runner.run_sync(bank_agent, "I want to my balance my account no is 915189150", run_config = geminiConfig.config, context = user_context)
+result = Runner.run_sync(bank_agent, "what is my balance my account no is 91234568", context = user_context, run_config = geminiConfig.config)
 
 
 print(result.final_output)
